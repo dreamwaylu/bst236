@@ -29,8 +29,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install mkdocs-material==9.5.5 mkdocs-glightbox
           
+      - name: Prepare directories
+        run: |
+          mkdir -p build/overrides
+          mkdir -p build/docs
+          cp -r docs/* build/docs/
+          cp -r overrides/* build/overrides/
+          
       - name: Build site
-        run: mkdocs build
+        run: mkdocs build -f mkdocs.yml
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
